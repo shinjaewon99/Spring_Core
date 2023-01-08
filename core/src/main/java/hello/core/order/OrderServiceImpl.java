@@ -33,4 +33,9 @@ public class OrderServiceImpl implements OrderService {
         // new 연산자를 사용해 Order 클래스의 값을 넣어 반환한다.
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
+
+    // 테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
