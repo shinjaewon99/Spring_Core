@@ -3,7 +3,10 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
     private MemberRepository memberRepository;
     
@@ -18,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     // Grade 등급에 따라 할인이 다름
     private DiscountPolicy discountPolicy;
 
-
+    @Autowired
     // FixDiscount인지 , RateDiscount인지 외부(AppConfig)에서 주입된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
