@@ -3,13 +3,19 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+/*
+final이 붙은 필드값의 생성자를 만들어준다.
+@RequiredArgsConstructor
+*/
 public class OrderServiceImpl implements OrderService {
-    private MemberRepository memberRepository;
-    
+    private final MemberRepository memberRepository;
+
     // 고정 할인
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
@@ -19,11 +25,19 @@ public class OrderServiceImpl implements OrderService {
 */
 
     // Grade 등급에 따라 할인이 다름
-    private DiscountPolicy discountPolicy;
-
+    private final DiscountPolicy discountPolicy;
+/*
+    @RequiredArgsConstructor에 의해 final인 필드값을 자동으로 생성자를 만들어준다.
     @Autowired
     // FixDiscount인지 , RateDiscount인지 외부(AppConfig)에서 주입된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+*/
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
