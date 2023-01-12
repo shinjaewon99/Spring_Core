@@ -19,6 +19,9 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
+        // 잘 사용 X
+//        @Bean(initMethod = "init", destroyMethod = "close")
+
         @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
