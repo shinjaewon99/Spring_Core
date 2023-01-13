@@ -17,15 +17,15 @@ public class LogDemoController {
     private final LogDemoService logDemoService;
 
     // MyLogger를 찾을수 있는 LookUp이 주입된다.
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
 
     @RequestMapping("log-demo")
     // view 템플릿에 렌더링 되지 않고 문자 그대로 웹에 띄워준다.
     @ResponseBody
     // http 요청 정보를 받을수있다.
-    public String logDemo(HttpServletRequest request) {
-        MyLogger myLogger = myLoggerProvider.getObject();
+    public String logDemo(HttpServletRequest request) throws InterruptedException{
+
         String requestUrl = request.getRequestURL().toString();
         myLogger.setRequestUrl(requestUrl);
 
